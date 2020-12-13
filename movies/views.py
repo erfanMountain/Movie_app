@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Movie
 
 
@@ -9,5 +9,5 @@ def home_page(request):
     return render(request, 'movies/movies_stuff.html', stuff_for_frontend)
 
 def create(request):
-    print("hello")
     return redirect('/')
+
