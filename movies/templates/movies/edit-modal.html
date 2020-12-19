@@ -1,0 +1,45 @@
+<div class="modal fade" id="edit-modal-{{movie.id}}">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModal">{{ movie.name }}</h5>
+                <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                    <form action="#" method="post">
+                            <!--csrf_token for security-->
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="editName">Name</label>
+                                <input type="text" class="form-control" id="editName" placeholder="Enter name" name="name" value="{{ movie.name}}" required/>
+                            </div>
+        
+                            <div class="form-group">
+                                    <label for="editPicture">Image URL</label>
+                                    <!--name attribute and it's value is super important because we will refer to it in the backend-->
+                                    <input type="text" class="form-control" id="editURL" placeholder="url" value="{{movie.picture}}" name="picture"/>    
+                            </div>
+        
+                            <div class="form-group">
+                                    <label for="editRating">Rating</label>
+                                    <!-- Here value="{{movie.rating}} means it takes the existing value from the data base" -->
+                                    <input type="number" class="form-control" id="editRating" placeholder="1-10" value="{{movie.rating}}" name="rating" min="0" max="10" required/>
+                            </div>
+        
+                            <div class="form-group">
+                                    <label for="editNotes">Notes</label>
+                                    <textarea name="notes" id="editNotes" placeholder="Add notes" class="form-control"></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Update movie</button>
+                    </form>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
