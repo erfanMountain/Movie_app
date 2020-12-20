@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import Movie
+from django.contrib import messages
 
 
 def home_page(request):
@@ -23,9 +24,9 @@ def create(request):
              rating=data.get('rating'),
              notes= data.get('notes'),
          )
+         messages.success(request, "New movie added: {}".format(data.get('name')))
         except Exception as e:
-            print(e)
-            pass
+            messages.warning(request, "Got an error when trying to create new movies {}".format(e))
 
     return redirect('/')
 
@@ -44,15 +45,17 @@ def edit(request, movie_id):
             movie_obj.rating = data.get('rating')
             movie_obj.notes = data.get('notes')
             movie_obj.save()
+            messages.success(request, "Movie updated: {}".format(data.get('name')))
         except Exception as e:
-            pass
+            messages.warning(request, f"Got an error when trying to update movie {data.get('name')}")
     return redirect('/')
 
 def delete(request, movie_id):
     try:
         movie_obj = Movie.objects.get(id=movie_id)
-        print(movie_obj.name)
+        movie_name = movie_obj.name
         movie_obj.delete()
+        messages.success(request, "Movie deleted: {}".format(movie_name))
     except Exception as e:
-        pass
+        messages.warning(request, "Got an error when trying to delete movie: {}".format(movie_name))
     return redirect('/')
