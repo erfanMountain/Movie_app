@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import home_page, create, edit
+from .views import home_page, create, edit, delete
 
 
 urlpatterns = [
@@ -7,5 +7,6 @@ urlpatterns = [
     path('create/', create, name='create'),
     # Here <str:movie_id> tell us about the movie id
     # Here name attribute is the friendly name what I will use in the template
-    path('edit/<str:movie_id>', edit, name='edit')
+    path('edit/<str:movie_id>', edit, name='edit'),
+    path('delete/<str:movie_id>', delete, name='delete')
 ]

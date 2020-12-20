@@ -48,3 +48,11 @@ def edit(request, movie_id):
             pass
     return redirect('/')
 
+def delete(request, movie_id):
+    try:
+        movie_obj = Movie.objects.get(id=movie_id)
+        print(movie_obj.name)
+        movie_obj.delete()
+    except Exception as e:
+        pass
+    return redirect('/')
